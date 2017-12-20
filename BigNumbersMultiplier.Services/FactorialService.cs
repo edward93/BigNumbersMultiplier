@@ -1,4 +1,6 @@
-﻿namespace BigNumbersMultiplier.Services
+﻿using System.Threading.Tasks;
+
+namespace BigNumbersMultiplier.Services
 {
     public class FactorialService : IFactorialService
     {
@@ -12,10 +14,10 @@
         public string Calculate(int number)
         {
             var factorialResult = "1";
-            for (int i = 1; i <= number; i++)
+            Parallel.For(1, number, i =>
             {
                 factorialResult = _multiplierService.Multiply(factorialResult, i.ToString());
-            }
+            });
 
             return factorialResult;
         }
